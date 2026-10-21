@@ -12,6 +12,7 @@ public class AstraxTeam extends JavaPlugin {
     private WarManager wars;
     private DisplayManager display;
     private BuffManager buffs;
+    private GuiManager gui;
     private AstraxTeamAPI api;
 
     @Override
@@ -24,6 +25,7 @@ public class AstraxTeam extends JavaPlugin {
         wars = new WarManager(this);
         display = new DisplayManager(this);
         buffs = new BuffManager(this);
+        gui = new GuiManager(this);
         api = new AstraxTeamAPI(this);
 
         teams.load();
@@ -38,6 +40,7 @@ public class AstraxTeam extends JavaPlugin {
         getCommand("teamadmin").setExecutor(adminCmd);
         getCommand("teamadmin").setTabCompleter(adminCmd);
 
+        Bukkit.getPluginManager().registerEvents(gui, this);
         Bukkit.getPluginManager().registerEvents(new TeamListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ClaimListener(this), this);
 
@@ -78,5 +81,6 @@ public class AstraxTeam extends JavaPlugin {
     public ZoneManager getZones() { return zones; }
     public WarManager getWars() { return wars; }
     public DisplayManager getDisplay() { return display; }
+    public GuiManager getGui() { return gui; }
     public AstraxTeamAPI getAPI() { return api; }
 }

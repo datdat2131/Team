@@ -121,6 +121,7 @@ public class TeamListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
+        if (plugin.getGui().isPrompting(p.getUniqueId())) return;
         TeamManager tm = plugin.getTeams();
         if (!tm.isChatMode(p.getUniqueId())) return;
         Team t = tm.getTeam(p.getUniqueId());

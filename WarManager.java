@@ -89,6 +89,11 @@ public class WarManager {
         return current != null && current.state != State.ENDED && current.isPart(u);
     }
 
+    public Request peekRequest(UUID teamId) {
+        Request r = requests.get(teamId);
+        return (r == null || r.expires() < System.currentTimeMillis()) ? null : r;
+    }
+
     public Location consumeRespawn(UUID u) { return respawn.remove(u); }
 
     // ---------- Tuyên chiến ----------

@@ -97,3 +97,9 @@ claims:
 placeholders:
   no-team: ""                # Giá trị khi người chơi không có team
   empty-rank: "-"
+
+# Menu GUI (/team hoặc /team gui)
+gui:
+  enabled: true                       # false = /team không tham số sẽ hiện help như cũ
+  filler-material: GRAY_STAINED_GLASS_PANE
+  click-sound: true

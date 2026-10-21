@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TeamCommand implements TabExecutor {
     private static final List<String> SUBS = List.of("create", "disband", "rename", "invite", "accept", "deny",
             "kick", "leave", "promote", "demote", "transfer", "info", "list", "pvp", "chat", "claim", "unclaim",
-            "zones", "war", "top", "help");
+            "zones", "war", "top", "gui", "help");
     private static final List<String> METRICS = List.of("points", "kills", "wins");
 
     private final AstraxTeam plugin;
@@ -27,7 +27,7 @@ public class TeamCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender s, Command c, String l, String[] a) {
         if (!(s instanceof Player p)) { m().send(s, "only-player"); return true; }
-        String sub = a.length == 0 ? "help" : a[0].toLowerCase();
+        String sub = a.length == 0 ? (cfg().getBoolean("gui.enabled", true) ? "gui" : "help") : a[0].toLowerCase();
         Team mine = tm().getTeam(p.getUniqueId());
         switch (sub) {
             case "create" -> create(p, mine, a);
@@ -50,6 +50,7 @@ public class TeamCommand implements TabExecutor {
             case "zones" -> zones(p);
             case "war" -> war(p, mine, a);
             case "top" -> top(p, a);
+            case "gui", "menu" -> plugin.getGui().open(p);
             default -> help(p);
         }
         return true;

@@ -148,3 +148,149 @@ admin-disbanded: "&aĐã giải tán team &e{team}&a."
 admin-points-set: "&aĐã đặt điểm của &e{team}&a = &e{points}&a."
 admin-war-stopped: "&aĐã huỷ trận war."
 admin-war-none: "&cKhông có trận war nào đang diễn ra."
+
+gui-prompt-create: "&aGõ &etên team&a vào chat (gõ &ecancel&a để huỷ)."
+gui-prompt-rename: "&aGõ &etên mới&a vào chat (gõ &ecancel&a để huỷ)."
+gui-prompt-cancelled: "&7Đã huỷ nhập."
+
+gui:
+  filler: " "
+  online: "&aOnline"
+  offline: "&7Offline"
+  back: "&c« Quay lại"
+  close: "&cĐóng menu"
+  prev: "&e« Trang trước"
+  next: "&eTrang sau »"
+  confirm-yes: "&a✔ Xác nhận"
+  confirm-no: "&c✖ Huỷ bỏ"
+  confirm-cmd: "&e/{command}"
+
+  title-noteam: "&8AstraxTeam"
+  title-main: "&8Team &6{team}"
+  title-members: "&8Thành viên"
+  title-member: "&8Quản lý {player}"
+  title-invite: "&8Mời người chơi"
+  title-top: "&8Xếp hạng &7- {metric}"
+  title-zones: "&8Khu vực"
+  title-war: "&8Team War"
+  title-war-pick: "&8Chọn team đối thủ"
+  title-confirm: "&8Xác nhận"
+
+  create-name: "&a&lTạo team"
+  create-lore:
+    - "&7Bấm rồi gõ tên team vào chat."
+  invite-name: "&e&lLời mời từ &f{team}"
+  invite-lore:
+    - "&aChuột trái: &7chấp nhận"
+    - "&cChuột phải: &7từ chối"
+  invite-none: "&7Bạn chưa có lời mời nào"
+
+  top-button: "&6&lBảng xếp hạng"
+  top-button-lore:
+    - "&7Xem top team và buff thưởng."
+
+  info-name: "&6&l{team}"
+  info-lore:
+    - "&7Leader: &e{leader}"
+    - "&7Hạng: &6#{rank}"
+    - "&7Điểm: &e{points}"
+    - "&7Kill/Chết: &a{kills}&7/&c{deaths} &8(KDR {kdr})"
+    - "&7Thắng/Thua war: &a{wins}&7/&c{losses}"
+    - "&7PvP đồng đội: {pvp}"
+    - ""
+    - "&8Bấm để xem trong chat"
+
+  members-name: "&b&lThành viên"
+  members-lore:
+    - "&7{count}/{max} người &8(online {online})"
+    - ""
+    - "&8Bấm để quản lý"
+  invite-btn-name: "&a&lMời người chơi"
+  invite-btn-lore:
+    - "&7Chọn người chơi online chưa có team."
+  zones-name: "&2&lKhu vực"
+  zones-lore:
+    - "&7Xem, chiếm hoặc bỏ khu vực."
+  war-name: "&c&lTeam War"
+  war-lore:
+    - "&7Tuyên chiến, nhận chiến, xem trận."
+  chat-name: "&d&lChat team: {state}"
+  chat-lore:
+    - "&7Bấm để bật/tắt chế độ chat team."
+  pvp-name: "&c&lPvP đồng đội: {state}"
+  pvp-lore:
+    - "&7Bấm để bật/tắt đánh đồng đội."
+  rename-name: "&e&lĐổi tên team"
+  rename-lore:
+    - "&7Bấm rồi gõ tên mới vào chat."
+  leave-name: "&c&lRời team"
+  leave-lore:
+    - "&7Bấm để rời team (có xác nhận)."
+  disband-name: "&4&lGiải tán team"
+  disband-lore:
+    - "&7Xoá vĩnh viễn team (có xác nhận)."
+
+  member-name: "&f{player}"
+  member-lore:
+    - "&7Vai trò: &e{role}"
+    - "&7Trạng thái: {status}"
+    - ""
+    - "&8Bấm để quản lý"
+  promote: "&a&lThăng chức"
+  promote-lore:
+    - "&7Member → Co-Leader"
+  demote: "&6&lGiáng chức"
+  demote-lore:
+    - "&7Co-Leader → Member"
+  transfer: "&b&lChuyển Leader"
+  transfer-lore:
+    - "&7Trao quyền Leader cho người này."
+  kick: "&c&lĐuổi khỏi team"
+  kick-lore:
+    - "&7Có xác nhận trước khi đuổi."
+
+  invite-player: "&a{player}"
+  invite-player-lore:
+    - "&7Bấm để gửi lời mời."
+  invite-empty: "&7Không có người chơi phù hợp"
+
+  top-name: "&e#{rank} &f{team}"
+  top-lore:
+    - "&7Leader: &e{leader} &8| &7{count} người"
+    - "&7Điểm: &e{points} &8| &7Thắng: &a{wins}"
+    - "&7Kill/Chết: &a{kills}&7/&c{deaths}"
+  top-buff: "&dBuff: &f{effects}"
+  top-empty: "&7Chưa có team nào"
+  metric-btn: "&e{metric}"
+
+  zone-name: "&e{zone}"
+  zone-lore:
+    - "&7World: &f{world}"
+    - "&7X: &f{x}"
+    - "&7Z: &f{z}"
+    - "&7Chủ: {owner}"
+    - ""
+    - "{action}"
+  zone-claim: "&aBấm để chiếm khu vực"
+  zone-unclaim: "&cBấm để bỏ khu vực"
+  zones-empty: "&7Admin chưa tạo khu vực nào"
+
+  war-status: "&e&lTrận hiện tại"
+  war-status-none:
+    - "&7Hiện không có trận war nào."
+  war-status-lore:
+    - "&e{a} &a{ka} &7- &c{kb} &e{b}"
+    - "&7Còn lại: &f{time}"
+  war-declare: "&c&lTuyên chiến"
+  war-declare-lore:
+    - "&7Chọn team để thách đấu."
+  war-request: "&6&lLời tuyên chiến từ &f{team}"
+  war-request-lore:
+    - "&aChuột trái: &7chấp nhận"
+    - "&cChuột phải: &7từ chối"
+  war-request-none: "&7Không có lời tuyên chiến nào"
+  war-team-name: "&c{team}"
+  war-team-lore:
+    - "&7Điểm: &e{points} &8| &7Online: &a{online}"
+    - ""
+    - "&8Bấm để tuyên chiến"

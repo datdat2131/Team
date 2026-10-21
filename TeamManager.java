@@ -115,6 +115,11 @@ public class TeamManager {
     // ---------- Lời mời ----------
     public void addInvite(UUID target, Invite inv) { invites.put(target, inv); }
 
+    public Invite peekInvite(UUID target) {
+        Invite inv = invites.get(target);
+        return (inv == null || inv.expires() < System.currentTimeMillis()) ? null : inv;
+    }
+
     public Invite popInvite(UUID target) {
         Invite inv = invites.remove(target);
         if (inv == null || inv.expires() < System.currentTimeMillis()) return null;

@@ -1,0 +1,31 @@
+name: AstraxTeam
+version: 1.0.0
+main: com.astraxbox.team.AstraxTeam
+api-version: '1.20'
+author: AstraxBox
+description: Hệ thống team toàn diện - AstraxBox
+softdepend: [PlaceholderAPI]
+commands:
+  team:
+    description: Lệnh quản lý team
+    usage: /team help
+    aliases: [t, astraxteam]
+    permission: astraxteam.use
+  teamchat:
+    description: Chat riêng trong team
+    usage: /tc [tin nhắn]
+    aliases: [tc]
+    permission: astraxteam.use
+  teamadmin:
+    description: Lệnh admin AstraxTeam
+    usage: /teamadmin help
+    aliases: [tadmin]
+    permission: astraxteam.admin
+permissions:
+  astraxteam.use:
+    default: true
+  astraxteam.admin:
+    default: op
+  astraxteam.bypass:
+    description: Bỏ qua bảo vệ khu vực claim
+    default: op

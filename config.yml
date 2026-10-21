@@ -1,0 +1,99 @@
+# ============================================================
+#  AstraxTeam - config.yml
+#  Dùng /teamadmin reload để áp dụng thay đổi.
+# ============================================================
+
+settings:
+  max-members: 10            # Giới hạn thành viên mỗi team
+  max-teams: 0               # Giới hạn số team toàn server (0 = không giới hạn)
+  min-name-length: 3
+  max-name-length: 16
+  name-regex: "[A-Za-z0-9_]+"
+  blocked-names: [admin, staff, owner]
+  invite-expire-seconds: 60
+  default-pvp: false         # Mặc định team mới có cho đánh đồng đội không
+
+# Vai trò TỐI THIỂU để dùng từng hành động: MEMBER / CO_LEADER / LEADER
+permissions:
+  invite: CO_LEADER
+  kick: CO_LEADER
+  promote: LEADER
+  demote: LEADER
+  rename: LEADER
+  pvp: CO_LEADER
+  claim: CO_LEADER
+  unclaim: CO_LEADER
+  war: CO_LEADER
+  disband: LEADER
+  transfer: LEADER
+
+display:
+  glow:
+    enabled: true            # Đồng đội phát sáng
+    only-in-war: false       # true = chỉ phát sáng khi đang team war
+    color: GREEN             # Màu glow (tên màu ChatColor)
+  nametag-prefix:
+    enabled: true            # Hiện [TênTeam] trên đầu
+    format: "&a[{team}] "
+  hud:
+    enabled: true            # ActionBar hiển thị đồng đội gần nhất
+    interval-ticks: 20
+    max-distance: 100        # Chỉ hiện đồng đội trong bán kính này (<=0: không giới hạn, cùng world)
+    max-shown: 3
+    format: "&a{player} &c❤{health} &7({distance}m)"
+    separator: " &8| "
+
+# Điểm thưởng/phạt
+points:
+  kill: 2                    # Giết người chơi team khác
+  death: 1                   # Bị người chơi team khác giết (trừ điểm, không xuống dưới 0)
+  war-win: 25
+  war-lose: 0
+  war-draw: 5
+
+# Bảng xếp hạng & buff cho top 1-5
+leaderboard:
+  metric: POINTS             # POINTS / KILLS / WINS (dùng cho xếp hạng + buff)
+  top-size: 10
+  buffs:
+    enabled: true
+    interval-seconds: 10
+    duration-seconds: 20
+    min-value: 1             # Team phải có giá trị tối thiểu này mới nhận buff
+    ranks:                   # Định dạng: HIEU_UNG:CAP_DO (cấp 0 = level I)
+      1: ["INCREASE_DAMAGE:0", "SPEED:0", "REGENERATION:0", "DAMAGE_RESISTANCE:0"]
+      2: ["INCREASE_DAMAGE:0", "SPEED:0", "REGENERATION:0"]
+      3: ["SPEED:0", "REGENERATION:0"]
+      4: ["SPEED:0"]
+      5: ["REGENERATION:0"]
+
+# Team war
+war:
+  request-timeout-seconds: 60
+  countdown-seconds: 10
+  duration-seconds: 600
+  min-players-per-team: 1
+  max-players-per-team: 0    # 0 = không giới hạn
+  keep-inventory: true       # Chết trong war không rớt đồ
+  heal-on-start: true
+  end-teleport-delay-seconds: 5
+  rewards:                   # Lệnh console chạy cho TỪNG người tham gia. Dùng %player%, %team%
+    winner-commands: []      # ví dụ: ["give %player% diamond 5"]
+    loser-commands: []
+    draw-commands: []
+
+# Claim / territory (admin tạo zone bằng /teamadmin zone ...)
+claims:
+  enabled: true
+  max-zones-per-team: 1
+  require-standing-inside: false   # true = phải đứng trong zone mới claim được
+  show-enter-message: true
+  protect:
+    break: true
+    place: true
+    interact: true           # cửa, rương, nút, ...
+
+# Placeholder
+placeholders:
+  no-team: ""                # Giá trị khi người chơi không có team
+  empty-rank: "-"

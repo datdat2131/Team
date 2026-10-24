@@ -14,9 +14,9 @@ File jar: `target/AstraxTeam.jar` → bỏ vào `plugins/`. Sau lần chạy đ�
    (Zone tính theo X/Z, bao trùm toàn bộ chiều cao.)
 3. Chỉnh `config.yml` / `messages.yml` rồi `/ateamadmin reload`.
 
-## Lệnh người chơi (`/ateam`, alias `/t`)
+## Lệnh người chơi (`/team`, alias `/t`)
 create, disband, rename, invite, accept, deny, kick, leave, promote, demote, transfer, info, list, pvp, chat,
-claim, unclaim, zones, war declare|accept|deny|status, top [points|kills|wins], gui. `/ateam` không tham số mở menu GUI. `/tc` = bật/tắt chat team.
+claim, unclaim, zones, war declare|accept|deny|status, top [points|kills|wins], gui. `/team` không tham số mở menu GUI. `/tc` = bật/tắt chat team.
 
 ## Lệnh admin (`/ateamadmin`, quyền `astraxteam.admin`)
 reload · arena set1|set2|info · zone pos1|pos2|create|delete|release|list · disband <team> · setpoints <team> <n> · war stop

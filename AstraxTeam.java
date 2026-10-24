@@ -36,8 +36,8 @@ public class AstraxTeam extends JavaPlugin {
         chests.load();
 
         TeamCommand teamCmd = new TeamCommand(this);
-        getCommand("ateam").setExecutor(teamCmd);
-        getCommand("ateam").setTabCompleter(teamCmd);
+        getCommand("team").setExecutor(teamCmd);
+        getCommand("team").setTabCompleter(teamCmd);
         getCommand("teamchest").setExecutor(chests);
         getCommand("teamchat").setExecutor(new TeamChatCommand(this));
         TeamAdminCommand adminCmd = new TeamAdminCommand(this);

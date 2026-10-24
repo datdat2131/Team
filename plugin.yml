@@ -6,10 +6,10 @@ author: AstraxBox
 description: Hệ thống team toàn diện - AstraxBox
 softdepend: [PlaceholderAPI, ProtocolLib]
 commands:
-  ateam:
-    description: Lệnh quản lý team (đặt tên khác /team để không đụng lệnh /team của Minecraft)
-    usage: /ateam help
-    aliases: [at, astraxteam]
+  team:
+    description: Lệnh quản lý team
+    usage: /team help
+    aliases: [astraxteam]
     permission: astraxteam.use
   teamchest:
     description: Mở rương chung của team

@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/** Rương chung của team (lưu vào chests.yml). Mở bằng /ateam chest hoặc /teamchest. */
+/** Rương chung của team (lưu vào chests.yml). Mở bằng /team chest hoặc /teamchest. */
 public class ChestManager implements Listener, CommandExecutor {
 
     public static class Holder implements InventoryHolder {

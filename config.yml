@@ -11,7 +11,6 @@ settings:
   name-regex: "[A-Za-z0-9_]+"
   blocked-names: [admin, staff, owner]
   invite-expire-seconds: 60
-  redirect-team-command: true   # Gõ /team ... tự chạy như /ateam ... (người chơi vẫn dùng được /team)
   default-pvp: false         # Mặc định team mới có cho đánh đồng đội không
 
 # Vai trò TỐI THIỂU để dùng từng hành động: MEMBER / CO_LEADER / LEADER
@@ -100,13 +99,13 @@ placeholders:
   no-team: ""                # Giá trị khi người chơi không có team
   empty-rank: "-"
 
-# Menu GUI (/ateam hoặc /ateam gui)
+# Menu GUI (/team hoặc /team gui)
 gui:
-  enabled: true                       # false = /ateam không tham số sẽ hiện help như cũ
+  enabled: true                       # false = /team không tham số sẽ hiện help như cũ
   filler-material: GRAY_STAINED_GLASS_PANE
   click-sound: true
 
-# Rương team (kho đồ chung): /ateam chest hoặc /teamchest
+# Rương team (kho đồ chung): /team chest hoặc /teamchest
 chest:
   enabled: true
   rows: 3                        # 1-6 hàng (chỉ áp dụng khi rương mới / mở rộng)

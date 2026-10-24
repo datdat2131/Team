@@ -97,7 +97,7 @@ public class TeamCommand implements TabExecutor {
     // ---------- Team ----------
     private void create(Player p, Team mine, String[] a) {
         if (mine != null) { m().send(p, "already-in-team"); return; }
-        if (a.length < 2) { usage(p, "/ateam create <tên>"); return; }
+        if (a.length < 2) { usage(p, "/team create <tên>"); return; }
         if (!validName(p, a[1], null)) return;
         int max = cfg().getInt("settings.max-teams", 0);
         if (max > 0 && tm().all().size() >= max) { m().send(p, "max-teams"); return; }
@@ -118,7 +118,7 @@ public class TeamCommand implements TabExecutor {
 
     private void rename(Player p, Team mine, String[] a) {
         if (!needTeam(p, mine) || !can(p, mine, "rename", Role.LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam rename <tên>"); return; }
+        if (a.length < 2) { usage(p, "/team rename <tên>"); return; }
         if (!validName(p, a[1], mine)) return;
         tm().rename(mine, a[1]);
         tm().broadcast(mine, "team-renamed", "team", mine.getName());
@@ -127,7 +127,7 @@ public class TeamCommand implements TabExecutor {
     // ---------- Thành viên ----------
     private void invite(Player p, Team mine, String[] a) {
         if (!needTeam(p, mine) || !can(p, mine, "invite", Role.CO_LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam invite <người chơi>"); return; }
+        if (a.length < 2) { usage(p, "/team invite <người chơi>"); return; }
         Player t = Bukkit.getPlayerExact(a[1]);
         if (t == null) { m().send(p, "player-offline", "player", a[1]); return; }
         if (tm().getTeam(t.getUniqueId()) != null) { m().send(p, "target-has-team"); return; }
@@ -158,7 +158,7 @@ public class TeamCommand implements TabExecutor {
 
     private void kick(Player p, Team mine, String[] a) {
         if (!needTeam(p, mine) || !can(p, mine, "kick", Role.CO_LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam kick <tên>"); return; }
+        if (a.length < 2) { usage(p, "/team kick <tên>"); return; }
         UUID target = mine.findMember(a[1]);
         if (target == null) { m().send(p, "member-not-found", "player", a[1]); return; }
         if (target.equals(p.getUniqueId())) { m().send(p, "cannot-target-self"); return; }
@@ -185,7 +185,7 @@ public class TeamCommand implements TabExecutor {
 
     private void setRank(Player p, Team mine, String[] a, boolean promote) {
         if (!needTeam(p, mine) || !can(p, mine, promote ? "promote" : "demote", Role.LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam " + (promote ? "promote" : "demote") + " <tên>"); return; }
+        if (a.length < 2) { usage(p, "/team " + (promote ? "promote" : "demote") + " <tên>"); return; }
         UUID target = mine.findMember(a[1]);
         if (target == null) { m().send(p, "member-not-found", "player", a[1]); return; }
         Role cur = mine.getRole(target);
@@ -203,7 +203,7 @@ public class TeamCommand implements TabExecutor {
 
     private void transfer(Player p, Team mine, String[] a) {
         if (!needTeam(p, mine) || !can(p, mine, "transfer", Role.LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam transfer <tên>"); return; }
+        if (a.length < 2) { usage(p, "/team transfer <tên>"); return; }
         UUID target = mine.findMember(a[1]);
         if (target == null) { m().send(p, "member-not-found", "player", a[1]); return; }
         if (target.equals(p.getUniqueId())) { m().send(p, "cannot-target-self"); return; }
@@ -294,7 +294,7 @@ public class TeamCommand implements TabExecutor {
         if (a.length >= 2) {
             if (a[1].equalsIgnoreCase("on")) val = true;
             else if (a[1].equalsIgnoreCase("off")) val = false;
-            else { usage(p, "/ateam pvp [on|off]"); return; }
+            else { usage(p, "/team pvp [on|off]"); return; }
         } else {
             val = !mine.isPvp();
         }
@@ -317,7 +317,7 @@ public class TeamCommand implements TabExecutor {
     private void claim(Player p, Team mine, String[] a) {
         if (!cfg().getBoolean("claims.enabled", true)) { m().send(p, "claims-disabled"); return; }
         if (!needTeam(p, mine) || !can(p, mine, "claim", Role.CO_LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam claim <zone>"); return; }
+        if (a.length < 2) { usage(p, "/team claim <zone>"); return; }
         ZoneManager.Zone z = plugin.getZones().get(a[1]);
         if (z == null) { m().send(p, "zone-not-found", "zone", a[1]); return; }
         if (z.owner != null) { m().send(p, "claim-fail-owned"); return; }
@@ -337,7 +337,7 @@ public class TeamCommand implements TabExecutor {
 
     private void unclaim(Player p, Team mine, String[] a) {
         if (!needTeam(p, mine) || !can(p, mine, "unclaim", Role.CO_LEADER)) return;
-        if (a.length < 2) { usage(p, "/ateam unclaim <zone>"); return; }
+        if (a.length < 2) { usage(p, "/team unclaim <zone>"); return; }
         ZoneManager.Zone z = plugin.getZones().get(a[1]);
         if (z == null) { m().send(p, "zone-not-found", "zone", a[1]); return; }
         if (!mine.getId().equals(z.owner)) { m().send(p, "not-your-zone"); return; }
@@ -364,7 +364,7 @@ public class TeamCommand implements TabExecutor {
         switch (sub) {
             case "declare" -> {
                 if (!can(p, mine, "war", Role.CO_LEADER)) return;
-                if (a.length < 3) { usage(p, "/ateam war declare <team>"); return; }
+                if (a.length < 3) { usage(p, "/team war declare <team>"); return; }
                 Team target = tm().getTeamByName(a[2]);
                 if (target == null) { m().send(p, "team-not-found"); return; }
                 wm.declare(p, mine, target);

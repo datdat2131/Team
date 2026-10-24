@@ -26,6 +26,7 @@ permissions:
   war: CO_LEADER
   disband: LEADER
   transfer: LEADER
+  chest: MEMBER             # Ai được mở rương team
 
 display:
   glow:
@@ -72,7 +73,7 @@ war:
   request-timeout-seconds: 60
   countdown-seconds: 10
   duration-seconds: 600
-  min-players-per-team: 1
+  min-players-per-team: 3    # Mỗi bên cần ít nhất ngần này người ONLINE mới được war
   max-players-per-team: 0    # 0 = không giới hạn
   keep-inventory: true       # Chết trong war không rớt đồ
   heal-on-start: true
@@ -98,8 +99,15 @@ placeholders:
   no-team: ""                # Giá trị khi người chơi không có team
   empty-rank: "-"
 
-# Menu GUI (/team hoặc /team gui)
+# Menu GUI (/ateam hoặc /ateam gui)
 gui:
-  enabled: true                       # false = /team không tham số sẽ hiện help như cũ
+  enabled: true                       # false = /ateam không tham số sẽ hiện help như cũ
   filler-material: GRAY_STAINED_GLASS_PANE
   click-sound: true
+
+# Rương team (kho đồ chung): /ateam chest hoặc /teamchest
+chest:
+  enabled: true
+  rows: 3                        # 1-6 hàng (chỉ áp dụng khi rương mới / mở rộng)
+  block-in-war: true             # Không mở rương khi đang trong team war
+  block-disband-if-not-empty: true   # Leader phải lấy hết đồ mới giải tán được

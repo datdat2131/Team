@@ -141,7 +141,7 @@ public class GuiManager implements Listener {
 
         g.set(11, btn(Material.EMERALD, "gui.create-name", "gui.create-lore"),
                 e -> prompt(p, "gui-prompt-create", in -> {
-                    p.performCommand("team create " + first(in));
+                    p.performCommand("ateam create " + first(in));
                     open(p);
                 }));
 
@@ -149,7 +149,7 @@ public class GuiManager implements Listener {
         Team from = inv == null ? null : tm().getTeamById(inv.teamId());
         if (from != null) {
             g.set(13, btn(Material.PAPER, "gui.invite-name", "gui.invite-lore", "team", from.getName()),
-                    e -> cmd(p, e.isRightClick() ? "team deny" : "team accept", () -> open(p)));
+                    e -> cmd(p, e.isRightClick() ? "ateam deny" : "ateam accept", () -> open(p)));
         } else {
             g.set(13, btn(Material.PAPER, "gui.invite-none", null), null);
         }
@@ -168,7 +168,7 @@ public class GuiManager implements Listener {
         g.fill(filler());
 
         g.set(10, Gui.item(Material.WHITE_BANNER, m().raw("gui.info-name", kv), m().list("gui.info-lore", kv)),
-                e -> closeCmd(p, "team info"));
+                e -> closeCmd(p, "ateam info"));
 
         g.set(11, Gui.head(p, m().raw("gui.members-name"), m().list("gui.members-lore", kv)),
                 e -> go(() -> openMembers(p, 0)));
@@ -183,24 +183,27 @@ public class GuiManager implements Listener {
 
         String chatState = m().raw(tm().isChatMode(u) ? "state-on" : "state-off");
         g.set(16, btn(Material.WRITABLE_BOOK, "gui.chat-name", "gui.chat-lore", "state", chatState),
-                e -> cmd(p, "team chat", () -> open(p)));
+                e -> cmd(p, "ateam chat", () -> open(p)));
 
         g.set(19, btn(t.isPvp() ? Material.LIME_DYE : Material.GRAY_DYE, "gui.pvp-name", "gui.pvp-lore",
                         "state", m().raw(t.isPvp() ? "state-on" : "state-off")),
-                e -> cmd(p, "team pvp", () -> open(p)));
+                e -> cmd(p, "ateam pvp", () -> open(p)));
 
         g.set(20, btn(Material.NAME_TAG, "gui.rename-name", "gui.rename-lore"),
                 e -> prompt(p, "gui-prompt-rename", in -> {
-                    p.performCommand("team rename " + first(in));
+                    p.performCommand("ateam rename " + first(in));
                     open(p);
                 }));
 
+        g.set(21, btn(Material.CHEST, "gui.chest-name", "gui.chest-lore"),
+                e -> go(() -> plugin.getChests().open(p)));
+
         if (leader) {
             g.set(24, btn(Material.TNT, "gui.disband-name", "gui.disband-lore"),
-                    e -> go(() -> confirm(p, "team disband", () -> open(p))));
+                    e -> go(() -> confirm(p, "ateam disband", () -> open(p))));
         } else {
             g.set(24, btn(Material.DARK_OAK_DOOR, "gui.leave-name", "gui.leave-lore"),
-                    e -> go(() -> confirm(p, "team leave", () -> open(p))));
+                    e -> go(() -> confirm(p, "ateam leave", () -> open(p))));
         }
 
         g.set(31, btn(Material.BARRIER, "gui.close", null), e -> go(p::closeInventory));
@@ -272,15 +275,15 @@ public class GuiManager implements Listener {
         g.set(4, Gui.head(Bukkit.getOfflinePlayer(target), m().raw("gui.member-name", "player", name, "role", roleName),
                 List.of()), null);
         g.set(11, btn(Material.LIME_DYE, "gui.promote", "gui.promote-lore"),
-                e -> cmd(p, "team promote " + name, () -> openMemberActions(p, target)));
+                e -> cmd(p, "ateam promote " + name, () -> openMemberActions(p, target)));
         g.set(15, btn(Material.ORANGE_DYE, "gui.demote", "gui.demote-lore"),
-                e -> cmd(p, "team demote " + name, () -> openMemberActions(p, target)));
+                e -> cmd(p, "ateam demote " + name, () -> openMemberActions(p, target)));
         if (viewerLeader) {
             g.set(21, btn(Material.NETHER_STAR, "gui.transfer", "gui.transfer-lore"),
-                    e -> go(() -> confirm(p, "team transfer " + name, () -> openMemberActions(p, target))));
+                    e -> go(() -> confirm(p, "ateam transfer " + name, () -> openMemberActions(p, target))));
         }
         g.set(23, btn(Material.LEATHER_BOOTS, "gui.kick", "gui.kick-lore"),
-                e -> go(() -> confirm(p, "team kick " + name, () -> openMemberActions(p, target))));
+                e -> go(() -> confirm(p, "ateam kick " + name, () -> openMemberActions(p, target))));
         g.set(18, btn(Material.ARROW, "gui.back", null), e -> go(() -> openMembers(p, 0)));
         g.open(p);
     }
@@ -296,7 +299,7 @@ public class GuiManager implements Listener {
         for (Player o : online) {
             entries.add(new Entry(
                     Gui.head(o, m().raw("gui.invite-player", "player", o.getName()), m().list("gui.invite-player-lore")),
-                    e -> cmd(p, "team invite " + o.getName(), () -> open(p))));
+                    e -> cmd(p, "ateam invite " + o.getName(), () -> open(p))));
         }
         if (entries.isEmpty()) entries.add(new Entry(btn(Material.BARRIER, "gui.invite-empty", null), null));
         openPaged(p, m().raw("gui.title-invite"), entries, page, pg -> openInvite(p, pg), () -> open(p));
@@ -362,8 +365,8 @@ public class GuiManager implements Listener {
                             "owner", owner == null ? m().raw("free") : "&e" + owner.getName(),
                             "action", action));
             Consumer<InventoryClickEvent> act = null;
-            if (mine != null && owner == null) act = e -> cmd(p, "team claim " + z.name, () -> openZones(p, page));
-            else if (own) act = e -> cmd(p, "team unclaim " + z.name, () -> openZones(p, page));
+            if (mine != null && owner == null) act = e -> cmd(p, "ateam claim " + z.name, () -> openZones(p, page));
+            else if (own) act = e -> cmd(p, "ateam unclaim " + z.name, () -> openZones(p, page));
             entries.add(new Entry(it, act));
         }
         if (entries.isEmpty()) entries.add(new Entry(btn(Material.BARRIER, "gui.zones-empty", null), null));
@@ -384,7 +387,7 @@ public class GuiManager implements Listener {
                 : m().list("gui.war-status-lore", "a", w.a.getName(), "b", w.b.getName(),
                         "ka", String.valueOf(w.killsA), "kb", String.valueOf(w.killsB),
                         "time", Messages.fmtTime(w.timeLeft));
-        g.set(11, Gui.item(Material.CLOCK, m().raw("gui.war-status"), statusLore), e -> closeCmd(p, "team war status"));
+        g.set(11, Gui.item(Material.CLOCK, m().raw("gui.war-status"), statusLore), e -> closeCmd(p, "ateam war status"));
 
         g.set(13, btn(Material.IRON_SWORD, "gui.war-declare", "gui.war-declare-lore"),
                 e -> go(() -> openWarPick(p, 0)));
@@ -394,8 +397,8 @@ public class GuiManager implements Listener {
         if (from != null) {
             g.set(15, btn(Material.CROSSBOW, "gui.war-request", "gui.war-request-lore", "team", from.getName()),
                     e -> {
-                        if (e.isRightClick()) cmd(p, "team war deny", () -> openWar(p));
-                        else cmd(p, "team war accept", () -> open(p));
+                        if (e.isRightClick()) cmd(p, "ateam war deny", () -> openWar(p));
+                        else cmd(p, "ateam war accept", () -> open(p));
                     });
         } else {
             g.set(15, btn(Material.GRAY_DYE, "gui.war-request-none", null), null);
@@ -413,7 +416,7 @@ public class GuiManager implements Listener {
             entries.add(new Entry(
                     Gui.item(Material.WHITE_BANNER, m().raw("gui.war-team-name", "team", t.getName()),
                             m().list("gui.war-team-lore", infoKv(t))),
-                    e -> cmd(p, "team war declare " + t.getName(), () -> openWar(p))));
+                    e -> cmd(p, "ateam war declare " + t.getName(), () -> openWar(p))));
         }
         if (entries.isEmpty()) entries.add(new Entry(btn(Material.BARRIER, "gui.top-empty", null), null));
         openPaged(p, m().raw("gui.title-war-pick"), entries, page, pg -> openWarPick(p, pg), () -> openWar(p));

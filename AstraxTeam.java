@@ -13,6 +13,7 @@ public class AstraxTeam extends JavaPlugin {
     private DisplayManager display;
     private BuffManager buffs;
     private GuiManager gui;
+    private ChestManager chests;
     private AstraxTeamAPI api;
 
     @Override
@@ -26,25 +27,30 @@ public class AstraxTeam extends JavaPlugin {
         display = new DisplayManager(this);
         buffs = new BuffManager(this);
         gui = new GuiManager(this);
+        chests = new ChestManager(this);
         api = new AstraxTeamAPI(this);
 
         teams.load();
         zones.load();
         wars.loadArena();
+        chests.load();
 
         TeamCommand teamCmd = new TeamCommand(this);
-        getCommand("team").setExecutor(teamCmd);
-        getCommand("team").setTabCompleter(teamCmd);
+        getCommand("ateam").setExecutor(teamCmd);
+        getCommand("ateam").setTabCompleter(teamCmd);
+        getCommand("teamchest").setExecutor(chests);
         getCommand("teamchat").setExecutor(new TeamChatCommand(this));
         TeamAdminCommand adminCmd = new TeamAdminCommand(this);
         getCommand("teamadmin").setExecutor(adminCmd);
         getCommand("teamadmin").setTabCompleter(adminCmd);
 
         Bukkit.getPluginManager().registerEvents(gui, this);
+        Bukkit.getPluginManager().registerEvents(chests, this);
         Bukkit.getPluginManager().registerEvents(new TeamListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ClaimListener(this), this);
 
         teams.startAutosave();
+        chests.start();
         display.start();
         buffs.start();
 
@@ -62,6 +68,7 @@ public class AstraxTeam extends JavaPlugin {
         if (wars != null) wars.shutdown();
         if (display != null) display.shutdown();
         if (buffs != null) buffs.stop();
+        if (chests != null) chests.save();
         if (teams != null) teams.save();
         if (zones != null) zones.save();
         Bukkit.getScheduler().cancelTasks(this);
@@ -82,5 +89,6 @@ public class AstraxTeam extends JavaPlugin {
     public WarManager getWars() { return wars; }
     public DisplayManager getDisplay() { return display; }
     public GuiManager getGui() { return gui; }
+    public ChestManager getChests() { return chests; }
     public AstraxTeamAPI getAPI() { return api; }
 }

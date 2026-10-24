@@ -78,6 +78,7 @@ public class TeamManager {
     }
 
     public void leave(Team t, UUID u) {
+        plugin.getChests().closeFor(u);
         t.removeMember(u);
         byPlayer.remove(u);
         chatMode.remove(u);
@@ -89,6 +90,7 @@ public class TeamManager {
     public void disband(Team t) {
         plugin.getWars().onTeamRemoved(t);
         plugin.getZones().releaseAll(t.getId());
+        plugin.getChests().onDisband(t);
         List<UUID> ids = new ArrayList<>(t.getMembers().keySet());
         teams.remove(t.getId());
         byName.remove(t.getName().toLowerCase());

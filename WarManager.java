@@ -103,7 +103,7 @@ public class WarManager {
         if (mine == target) { m.send(p, "war-self"); return; }
         if (!arenaReady()) { m.send(p, "war-no-arena"); return; }
         if (current != null) { m.send(p, "war-busy"); return; }
-        int min = c.getInt("war.min-players-per-team", 1);
+        int min = c.getInt("war.min-players-per-team", 3);
         if (mine.getOnlineMembers().size() < min || target.getOnlineMembers().size() < min) {
             m.send(p, "war-no-players", "min", String.valueOf(min));
             return;
@@ -122,7 +122,7 @@ public class WarManager {
         if (from == null) { m.send(p, "war-request-none"); return; }
         if (!arenaReady()) { m.send(p, "war-no-arena"); return; }
         if (current != null) { m.send(p, "war-busy"); return; }
-        int min = plugin.getConfig().getInt("war.min-players-per-team", 1);
+        int min = plugin.getConfig().getInt("war.min-players-per-team", 3);
         if (from.getOnlineMembers().size() < min || mine.getOnlineMembers().size() < min) {
             m.send(p, "war-no-players", "min", String.valueOf(min));
             return;

@@ -9,16 +9,16 @@ mvn clean package
 File jar: `target/AstraxTeam.jar` → bỏ vào `plugins/`. Sau lần chạy đầu sẽ có `config.yml` và `messages.yml`.
 
 ## Admin setup (làm một lần)
-1. Đấu trường: đứng ở điểm spawn của team A → `/teamadmin arena set1`, điểm spawn team B → `/teamadmin arena set2`.
-2. Khu vực claim: đứng góc 1 → `/teamadmin zone pos1`, góc 2 → `/teamadmin zone pos2`, rồi `/teamadmin zone create <tên>`.
+1. Đấu trường: đứng ở điểm spawn của team A → `/ateamadmin arena set1`, điểm spawn team B → `/ateamadmin arena set2`.
+2. Khu vực claim: đứng góc 1 → `/ateamadmin zone pos1`, góc 2 → `/ateamadmin zone pos2`, rồi `/ateamadmin zone create <tên>`.
    (Zone tính theo X/Z, bao trùm toàn bộ chiều cao.)
-3. Chỉnh `config.yml` / `messages.yml` rồi `/teamadmin reload`.
+3. Chỉnh `config.yml` / `messages.yml` rồi `/ateamadmin reload`.
 
-## Lệnh người chơi (`/team`, alias `/t`)
+## Lệnh người chơi (`/ateam`, alias `/t`)
 create, disband, rename, invite, accept, deny, kick, leave, promote, demote, transfer, info, list, pvp, chat,
-claim, unclaim, zones, war declare|accept|deny|status, top [points|kills|wins], gui. `/team` không tham số mở menu GUI. `/tc` = bật/tắt chat team.
+claim, unclaim, zones, war declare|accept|deny|status, top [points|kills|wins], gui. `/ateam` không tham số mở menu GUI. `/tc` = bật/tắt chat team.
 
-## Lệnh admin (`/teamadmin`, quyền `astraxteam.admin`)
+## Lệnh admin (`/ateamadmin`, quyền `astraxteam.admin`)
 reload · arena set1|set2|info · zone pos1|pos2|create|delete|release|list · disband <team> · setpoints <team> <n> · war stop
 
 ## Quyền

@@ -1,6 +1,6 @@
 # AstraxTeam (AstraxBox)
 
-Plugin team cho Paper/Spigot 1.20.x (Java 17). Soft-depend: PlaceholderAPI.
+Plugin team cho Paper/Spigot 1.20.x (Java 17). Soft-depend: PlaceholderAPI, **ProtocolLib 5.x (bắt buộc nếu muốn glow riêng cho team)**.
 
 ## Build
 ```

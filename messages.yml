@@ -124,7 +124,7 @@ help:
   - "&e/ateam list &7- Danh sách team"
   - "&e/ateam top [points|kills|wins] &7- Bảng xếp hạng"
   - "&e/ateam chat [tin] &7(&e/tc&7) - Chat team"
-  - "&e/ateam chest &7(&e/teamchest&7) - Rương chung của team"
+  - "&e/ateam chest|echest &7(&e/teamchest&7) - Rương chung của team"
   - "&e/ateam claim|unclaim <zone> &7- Chiếm / bỏ khu vực"
   - "&e/ateam zones &7- Danh sách khu vực"
   - "&e/ateam war declare <team>|accept|deny|status &7- Team war"

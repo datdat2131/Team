@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -23,6 +24,17 @@ public class TeamListener implements Listener {
     private final AstraxTeam plugin;
 
     public TeamListener(AstraxTeam plugin) { this.plugin = plugin; }
+
+    /** Gõ /team ... sẽ tự chuyển thành /ateam ... (tránh đụng lệnh /team có sẵn của Minecraft). */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onCommand(PlayerCommandPreprocessEvent e) {
+        if (!plugin.getConfig().getBoolean("settings.redirect-team-command", true)) return;
+        String msg = e.getMessage();
+        String lower = msg.toLowerCase();
+        if (lower.equals("/team") || lower.startsWith("/team ")) {
+            e.setMessage("/ateam" + msg.substring(5));
+        }
+    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {

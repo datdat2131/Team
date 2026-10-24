@@ -11,6 +11,7 @@ settings:
   name-regex: "[A-Za-z0-9_]+"
   blocked-names: [admin, staff, owner]
   invite-expire-seconds: 60
+  redirect-team-command: true   # Gõ /team ... tự chạy như /ateam ... (người chơi vẫn dùng được /team)
   default-pvp: false         # Mặc định team mới có cho đánh đồng đội không
 
 # Vai trò TỐI THIỂU để dùng từng hành động: MEMBER / CO_LEADER / LEADER
@@ -30,7 +31,7 @@ permissions:
 
 display:
   glow:
-    enabled: true            # Đồng đội phát sáng
+    enabled: true            # Đồng đội phát sáng - CHỈ đồng đội thấy nhau, bản thân không tự sáng (cần ProtocolLib)
     only-in-war: false       # true = chỉ phát sáng khi đang team war
     color: GREEN             # Màu glow (tên màu ChatColor)
   nametag-prefix:

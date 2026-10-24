@@ -4,7 +4,7 @@ main: com.astraxbox.team.AstraxTeam
 api-version: '1.20'
 author: AstraxBox
 description: Hệ thống team toàn diện - AstraxBox
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, ProtocolLib]
 commands:
   ateam:
     description: Lệnh quản lý team (đặt tên khác /team để không đụng lệnh /team của Minecraft)
@@ -14,7 +14,7 @@ commands:
   teamchest:
     description: Mở rương chung của team
     usage: /teamchest
-    aliases: [tchest]
+    aliases: [tchest, echest, tec]
     permission: astraxteam.use
   teamchat:
     description: Chat riêng trong team

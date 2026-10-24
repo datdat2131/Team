@@ -59,6 +59,16 @@ public class AstraxTeam extends JavaPlugin {
             new AstraxExpansion(this).register();
             getLogger().info("Đã đăng ký PlaceholderAPI: %astraxteam_...%");
         }
+        if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
+            try {
+                display.setGlowHook(GlowLoader.create(this));
+                getLogger().info("Đã bật glow riêng cho team (ProtocolLib).");
+            } catch (Throwable t) {
+                getLogger().warning("Không khởi tạo được glow riêng: " + t);
+            }
+        } else if (getConfig().getBoolean("display.glow.enabled", true)) {
+            getLogger().warning("Chưa cài ProtocolLib -> glow team đang TẮT. Cài ProtocolLib 5.x để đồng đội thấy glow của nhau.");
+        }
         for (org.bukkit.entity.Player p : Bukkit.getOnlinePlayers()) display.refresh(p);
         getLogger().info("AstraxTeam đã bật - " + teams.all().size() + " team.");
     }

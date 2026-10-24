@@ -13,7 +13,7 @@ public class DisplayManager {
     private static final String SB_PREFIX = "axt";
 
     private final AstraxTeam plugin;
-    private final Set<UUID> glowing = new HashSet<>();
+    private GlowHook hook;
     private BukkitTask task;
 
     public DisplayManager(AstraxTeam plugin) { this.plugin = plugin; }
@@ -30,9 +30,13 @@ public class DisplayManager {
         if (task != null) { task.cancel(); task = null; }
     }
 
+    public void setGlowHook(GlowHook hook) { this.hook = hook; }
+
     public void shutdown() {
         stop();
+        if (hook != null) hook.shutdown();
         for (Player p : Bukkit.getOnlinePlayers()) clear(p);
+        hook = null;
     }
 
     public void refreshAll() {
@@ -51,7 +55,7 @@ public class DisplayManager {
 
     public void clear(Player p) {
         removeEntries(p);
-        if (glowing.remove(p.getUniqueId())) p.setGlowing(false);
+        if (hook != null) hook.clear(p);
     }
 
     private ChatColor parseColor(String s) {
@@ -62,15 +66,16 @@ public class DisplayManager {
         }
     }
 
-    /** Cập nhật glow + tiền tố tên cho 1 người chơi theo team hiện tại. */
+    /**
+     * Cập nhật tiền tố tên + màu viền (scoreboard team) và glow riêng theo team.
+     * Glow thật sự (chỉ đồng đội thấy) do GlowManager gửi bằng packet.
+     */
     public void refresh(Player p) {
         FileConfiguration c = plugin.getConfig();
         removeEntries(p);
         Team t = plugin.getTeams().getTeam(p.getUniqueId());
-        boolean glow = false;
         if (t != null) {
-            boolean glowCfg = c.getBoolean("display.glow.enabled", true)
-                    && (!c.getBoolean("display.glow.only-in-war", false) || plugin.getWars().isAlive(p.getUniqueId()));
+            boolean glowCfg = c.getBoolean("display.glow.enabled", true);
             boolean prefix = c.getBoolean("display.nametag-prefix.enabled", true);
             if (glowCfg || prefix) {
                 Scoreboard sb = Bukkit.getScoreboardManager().getMainScoreboard();
@@ -83,14 +88,8 @@ public class DisplayManager {
                         : "");
                 st.addEntry(p.getName());
             }
-            glow = glowCfg;
         }
-        if (glow) {
-            p.setGlowing(true);
-            glowing.add(p.getUniqueId());
-        } else if (glowing.remove(p.getUniqueId())) {
-            p.setGlowing(false);
-        }
+        if (hook != null) hook.refresh(p);
     }
 
     // ---------- HUD ----------
